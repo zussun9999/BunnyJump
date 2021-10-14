@@ -6,28 +6,36 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 1.0f;
 
-    Rigidbody2D rigidbody;
+    public float jumpForce = 0.1f;
 
+    Rigidbody2D rigidbody2d;
 
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody2d = GetComponent<Rigidbody2D>();
+
     }
 
 
     private void Update()
     {
-        Vector2 f = new Vector2(0, 0);
+        Vector2 f = new Vector2(0,0);
 
-        if (Input.GetKey(KeyCode.D))
+        if(Input.GetKey(KeyCode.D))
         {
-            f = new Vector2(speed, 0);
+            f = new Vector2(speed,0);
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if(Input.GetKey(KeyCode.A))
         {
-             f = new Vector2(-speed, 0);
+            f = new Vector2(-speed,0);
+        }
+        else if(Input.GetKey(KeyCode.Space))
+        {
+            rigidbody2d.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
 
-        rigidbody.AddForce(f);
+        rigidbody2d.AddForce(f);
     }
+
+
 }
